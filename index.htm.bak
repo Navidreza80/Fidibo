@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="style/header.css" rel="stylesheet">
+	<link href="style/books.css" rel="stylesheet">
+	<link href="style/detail.css" rel="stylesheet">	
+	<link href="style/publisher.css" rel="stylesheet">		
+	<link href="style/writer.css" rel="stylesheet">	
+	<link href="style/bookItems.css" rel="stylesheet">
+	<link href="style/basket.css" rel="stylesheet">
+	
+    <link rel="icon" href="images/favicon.ico">
+	
+	<script src="script/books.json">   </script>
+	<script src="script/writers.json">   </script>	
+	<script src="script/publishers.json">   </script>		
+	<script src="script/generate.js">   </script>	
+	<script src="script/search.js">   </script>		
+	
+</head>
+<body id="all" class="">
+
+<div id="header" class=""> 
+	<div class="top">
+		<div class="logo">   </div>	
+		<div class="search">
+			<input id="search" type="text" placeholder="جستجو در عنوان و نویسنده"> 
+			<div id="results" class="hide">	
+				<div>
+					<img src="images/books/02.jpg">
+					<span>  راز جفر </span>
+				</div>	
+				<div>
+					<img src="images/books/01.jpg">
+					<span>  مردی به نام اوه </span>
+				</div>	
+				<div>
+					<img src="images/books/03.jpg">
+					<span>  پرندگان </span>
+				</div>				
+			</div>
+			
+			<div id="overlay" class="hide"> </div>
+
+		</div>	
+		<div class="sign">  ورود / ثبت نام </div>	
+		<div class="basket" onclick="basketMenu()"> 
+			
+			<div id="basMenu">
+				<h2 id="basHead">  3 عنوان در سبد </h2>
+				<ul id="miniBasket">
+					<!--<li>
+						<img src="images/books/01.jpg">
+						<div class="info">
+							<h2>  نام کتاب </h2>
+							<span> نویسنده </span>
+						</div>
+						<div class="bottom">
+							<span class="del"> حذف از سبد </span>
+							<span class="price"> 60000 ریال </span>							
+						</div>
+					</li>-->
+					
+				</ul>
+				<div id="basSum" class="sum">	
+					<span class="showBasket" onclick="showBas()"> نمایش سبد و پرداخت</span>
+					<span class="totalPrice"> 60000 ریال </span>							
+				</div>				
+				
+			</div>
+
+
+		</div>	
+		<div class="dark" onclick="switchDark()">   </div>	
+	</div>
+	<div class="bottom">
+		<div class="items home">  خانه </div>	
+		<div class="items ebook">  کتاب الکترونیکی </div>	
+		<div class="items audio"> کتاب صوتی  </div>	
+		<div class="items mag">  مجلات  </div>	
+		<div class="items course"> دانشگاهی  </div>	
+		<div class="items plus"> پلاس  </div>	
+		<div class="items gap">   </div>	
+		<div class="items app">  دانلود اپ </div>			
+		
+		
+	</div>	
+
+</div>
+
+
+<div id="navBar"> 
+	<div class="holder">
+		<span>خانه </span> 
+		>
+		<span>کتاب ها </span>	
+	</div>
+
+</div>
+
+<div id="allBooks" class="">
+	<div class="side"> 
+		<div class="filters">  
+			<h2>  فیلترهای انتخاب شده</h2>
+			<span class="filter"> کتاب متنی</span>
+			<span class="filter"> میکروبوک</span>			
+			<span class="filter"> مجله</span>			
+		</div>	
+		<div class=""> 
+
+		</div>	
+		<div class=""> 
+			<input type="checkbox" id="exi" name="ex">
+			<label for="exi"> نمایش موجودها </label>
+		</div>
+		<div class=""> 
+			<input type="checkbox" id="off0" name="of0">
+			<label for="off0"> فقط تخفیفی ها </label>
+		</div>		
+		
+		<div class="multi"> 
+			<h2>  دسته ها  </h2>
+			<input type="checkbox" id="cat1" name="ca">
+			<label for="cat1"> رمان </label>
+			
+			<input type="checkbox" id="cat2" name="ca">
+			<label for="cat2"> اجتماعی </label>	
+
+			<input type="checkbox" id="cat3" name="ca">
+			<label for="cat3"> ورزشی </label>		
+		</div>		
+	</div>
+	
+	<div class="main">  
+		<div class="tags">   </div>
+		<div class="set">
+			<div class="title">  کتاب ها </div>
+			<div class="sort">  <span id="selSort"> قیمت </span> 
+				<ul>
+					<li>
+						<label> سال  </label>						
+					</li>
+					<li>
+						<label> قیمت </label>										
+					</li>					
+					<li>
+						<label> تخفیف </label>						
+					</li>
+					<li>
+						<label> موجودی </label>										
+					</li>						
+				</ul>
+			</div>
+			<div class="view sel" onclick="changeView(1)">   </div>
+			<div class="view" onclick="changeView(2)">   </div>  
+		</div>
+		<div id="grid" class="view1">  
+		<div class="items" onclick="showBook(0)"> 
+				<img src="images/books/01.jpg">	
+				<span class="offLable"> 20% </span>	
+				<div class="info">
+					<h2> نام کتاب </h2>
+					<span class="writer"> جفر </span>
+					<span class="star">  </span>
+					<p class="describe"> خلاصه کتاب </p>	
+					<span class="price"> 25000 ریال <i> 20000 ریال</i> </span>				
+				</div>
+			</div>
+		<!-- 		<div class="items"> 
+				<img src="images/books/02.jpg">
+				<div class="info">
+					<h2> نام کتاب </h2>
+					<span class="writer"> جفر </span>
+					<span class="star">  </span>
+					<p class="describe"> خلاصه کتاب </p>	
+					<span class="price"> 25000 ریال <i> 20000 ریال</i> </span>					
+				</div>
+			</div>			
+			<div class="items"> 
+				<img src="images/books/03.jpg">
+				<div class="info">
+					<h2> نام کتاب </h2>
+					<span class="writer"> جفر </span>
+					<span class="star">  </span>
+					<p class="describe"> خلاصه کتاب </p>	
+					<span class="price"> 25000 ریال <i> 20000 ریال</i> </span>					
+				</div>
+			</div>			
+			
+			<div class="items"> 
+				<img src="images/books/04.jpg">
+				<div class="info">
+					<h2> نام کتاب </h2>
+					<span class="writer"> جفر </span>
+					<span class="star">  </span>
+					<p class="describe"> خلاصه کتاب </p>						
+					<span class="price"> 25000 ریال <i> 20000 ریال</i> </span>					
+				</div>
+			</div>			
+			-->
+		</div>		
+	</div>
+
+	
+	</div>
+<div id="detail" class="">
+
+
+	<div class="main"> 
+		<div class="top"> 
+			<img id="bookImg" src="images/books/01.jpg">
+			<div class="info">
+				<h2 id="bookName"> نام کتاب </h2>	
+				<p class="describe"> خلاصه کتاب </p>	
+				<span class="writer"> نویسنده : <span id="writerName">  </span> </span>
+				<span class="publisher"> ناشر : <span id="publisherName">  </span></span>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="head">  
+				<a href="#about">  درباره <i> نام کتاب </i> </a>
+				<a href="#myScore">  نقد و امتیاز </a>
+			</div>
+			<div class="body"> 
+				<p id="about">
+				</p>
+				<div id="bookScores">  
+					<span> امتیاز کتاب :</span>
+
+				</div>
+
+			</div>
+			
+		</div>
+	</div>
+	<div class="side"> 
+		<div class="buy"> 	
+
+		</div>
+		<div class="bookmark"> 	
+
+		</div>		
+		
+	</div>	
+	<div class="fromWriter">  
+		<span>  از همین نویسنده : </span>
+		
+		<div class="miniSlider">
+			<div id="gal1" class="gal">	
+														
+			
+			</div>
+		
+		</div>
+		
+	</div>	
+	<div class="fromPublisher">  
+		<span>  از همین ناشر : </span>
+		
+		<div class="miniSlider">
+			<div id="gal2" class="gal">
+	
+														
+			
+			</div>
+		
+		</div>
+		
+	</div>					
+	
+	
+
+
+</div>
+<div id="publisher" class="hide">
+	<div class="top"> 
+		<img id="pubImg" src="images/pub/01.png">
+		<div class="info">
+			<h2 id="pubName"> نام ناشر </h2>	
+			<p class="describe"id="pubDes">دی را تغییر داده است. شاید عجیب به نظر برسد اما عبور از این خط جغرافیایی آرزوهای آدم‌های زیادی بوده است. آدم‌هایی که می‌خواستند کنار خانه و خانواده‌شان باشند، آدم‌هایی که روزی با امید به زندگی بهتر به کره شمالی پا گذاشتند و آدم‌هایی که خواسته‌اند از کره شمالی فرار کنند. مدار 38 درجه جایی است که پس از جنگ جهانی دوم به عنوان مرز دو کره تعیین شد و حکومتی کمونیستی در شمال و ح درباره ناشر </p>	
+		</div>
+	</div>
+	<div class="fromPublisher">  
+					<span>  از همین ناشر : </span>
+					
+					<div class="miniSlider">
+						<div id="gal4" class="gal">
+
+																	
+						
+						</div>
+					
+					</div>
+					
+				</div>					
+				
+	
+</div>
+<div id="writer" class="hide">
+	<div class="top"> 
+		<img src="images/icons/w1.png">
+		<div class="info">
+			<h2 id="wrName"> نام نویسنده </h2>	
+			<p class="describe" id="wrDes">دی را تغییر داده است. شاید عجیبواستند کنار خانه و خاگی بهه شمالی پا گذاشتند و آدم‌هایی که خوالی فرار کنند. مدار 38 درجه جایی است که پس از جنگ جهانی دوم به عنوان مرز دو کره تعیین شد و حکومتی کمونیستی در شمال و ح درباره ناشر </p>	
+		</div>
+	</div>
+	<div class="fromWriter">  
+					<span>  از همین نویسنده : </span>
+					
+					<div class="miniSlider">		
+						<div id="gal3" class="gal">				
+						
+						</div>			
+					</div>
+					
+				</div>					
+				
+	
+</div>
+<div id="basket" class="hide">
+ 	<div class="main"> 
+		<div class="top"> 
+			<h2 class="basCount">سبد خرید (<span id="basCount"> 3 عنوان </span>)</h2>
+		</div>
+		<div class="bottom">
+			<div class="basItems">
+				<img src="images/books/02.jpg">
+				<span>  راز جفر </span>
+				<span class="price">  28000 ریال </span>				
+				<span class="del">  حذف از سبد </span>				
+			</div>	
+			<div class="basItems">
+				<img src="images/books/05.jpg">
+				<span>  آس و پاس های جوبار </span>
+				<span class="price">  28000 ریال </span>				
+				<span class="del">  حذف از سبد </span>				
+			</div>				
+			<div class="basItems">
+				<img src="images/books/08.jpg">
+				<span>  برندگان </span>
+				<span class="price">  28000 ریال </span>				
+				<span class="del">  حذف از سبد </span>				
+			</div>				
+		</div>
+	</div>
+	<div class="side"> 
+		<div class="factor"> 	
+			<h2>  فاکتور  </h2>
+			<div class="total">  جمع کل  :       <span> 70000 ریال </span></div>					
+			<div class="pay"> پرداخت نهایی </div>
+		</div>		
+	</div>	
+	
+</div>
+
+<div id="footer">   </div>
+
+
+</div>
+
+<script>
+
+/*  dynamic generation  */
+
+fillWithBooks("grid",books);
+
+function generateBookItems(holderID,jsonDataItem){
+
+          //alert(products[i].fname);
+
+          let it = document.createElement('div')
+          it.className = "items";
+		  
+		  it.addEventListener("click", function(){showBook(jsonDataItem.id)}); 
+		  
+          let pic = document.createElement('img');
+          pic.src = "images/books/" + jsonDataItem.pic[0];
+
+          it.appendChild(pic);
+
+          let info = document.createElement('div')
+          info.className = "info";
+
+          let title = document.createElement('h2');
+          title.innerHTML = jsonDataItem.title;
+		  
+          let wr = document.createElement('span');
+          wr.className = "writer";	
+		  var bookWriter = writers.find(el=> el.id == jsonDataItem.writer);
+          wr.innerHTML = bookWriter.fname;		  
+
+          let star = document.createElement('span');
+          star.className = "star";
+          star.style.width =  jsonDataItem.star * 18 + "px";
+
+          let par = document.createElement('p');
+          par.innerHTML = jsonDataItem.describe;
+
+		  let price = document.createElement('span');
+          price.className = "price";
+          price.innerHTML = jsonDataItem.price + " ریال";
+        
+
+          info.appendChild(title);
+          info.appendChild(wr);
+          info.appendChild(star);
+          info.appendChild(par);	
+          info.appendChild(price);	
+		  
+		  it.appendChild(pic);
+		  it.appendChild(info);		  
+		  
+		  
+		  if(jsonDataItem.off > 0){
+		  
+		    let offLab = document.createElement('span');
+			offLab.className = "offLable";
+			offLab.innerHTML = jsonDataItem.off + "%";
+			it.appendChild(offLab);	
+			
+		    let priceOff = document.createElement('i');
+			priceOff.innerHTML = jsonDataItem.price*(100-jsonDataItem.off) + " ریال";
+			price.appendChild(priceOff);
+		  }
+		  
+		  document.getElementById(holderID).appendChild(it);	
+}
+
+function fillWithBooks(holderID,jsonData){
+    document.getElementById(holderID).innerHTML = "";
+
+	for(let i=0; i<jsonData.length;i++){
+	  generateBookItems(holderID,jsonData[i]);
+	}
+}
+
+/*  ui  */
+
+
+	
+/*  search  */
+
+search.onkeyup = searchBooks;
+
+overlay.onclick = function(){
+	results.className = "hide";
+	overlay.className = "hide";	
+}	
+
+
+/*  scroll  */
+
+window.onscroll = function(){
+	if(window.pageYOffset > 100){
+		header.className = "scroll";
+	}
+	else{
+		header.className = "";
+	}
+}
+
+</script>
+
+</body>
+</html>
